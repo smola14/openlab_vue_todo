@@ -1,9 +1,13 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<template>
+  <div>Halo</div>
+</template>
+
+<script>
+export default {
+  setup() {
+    return {}
+  },
+}
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style lang="scss" scoped></style>
