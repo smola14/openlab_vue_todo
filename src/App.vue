@@ -14,7 +14,7 @@
         :class="{ 'is-tab': $route.path === '/' }"
         to="/"
       >
-        Home
+        <box-icon class="menu-icon" name="home"></box-icon> Home
       </router-link>
 
       <router-link
@@ -22,7 +22,7 @@
         :class="{ 'is-tab': $route.path === '/deleted' }"
         to="/deleted"
       >
-        Deleted tasks
+        <box-icon class="menu-icon" name="folder-minus"></box-icon>Deleted tasks
       </router-link>
     </div>
   </nav>
@@ -39,5 +39,9 @@ html {
     radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
+}
+
+.menu-icon {
+  margin-right: 5px;
 }
 </style>
