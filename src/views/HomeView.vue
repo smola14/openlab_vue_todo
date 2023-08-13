@@ -33,7 +33,6 @@
           </div>
         </li>
       </ul>
-      <button @click="$router.push('/deleted')">Deleted tasks</button>
     </div>
   </div>
 </template>
