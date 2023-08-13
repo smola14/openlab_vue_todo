@@ -25,7 +25,7 @@
               {{ item.name }}
             </span>
             <button class="button is-danger" @click="item.deleted = true">
-              X
+              <box-icon name="x"></box-icon>
             </button>
           </div>
         </li>
