@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <ul>
       <button @click="$router.push('/')">&lt; back to active tasks</button>
       <h1 class="title">Deleted tasks</h1>
@@ -9,6 +9,9 @@
           <span>
             {{ item.name }}
           </span>
+          <button class="button" @click="item.deleted = false">
+            <box-icon name="refresh"></box-icon>
+          </button>
         </div>
       </li>
     </ul>

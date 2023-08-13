@@ -1,6 +1,5 @@
 <template>
-  <div >
-    {{ todoStore.count }}
+  <div>
     <div>
       <div>
         <input

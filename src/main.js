@@ -6,6 +6,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import BuLMA from 'bulma'
+import 'boxicons'
 
 const app = createApp(App)
 
