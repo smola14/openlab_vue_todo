@@ -11,10 +11,13 @@
           <span>
             {{ item.name }}
           </span>
-          <button class="button" @click="item.deleted = false">
+          <button class="button is-small is-info" @click="item.deleted = false">
             <box-icon name="refresh"></box-icon>
           </button>
-          <button class="button" @click="deleteItemPermanently(index)">
+          <button
+            class="button is-small is-danger"
+            @click="deleteItemPermanently(index)"
+          >
             <box-icon name="trash"></box-icon>
           </button>
         </div>

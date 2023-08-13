@@ -5,7 +5,7 @@
         <input
           class="input"
           type="text"
-          placeholder="Text input"
+          placeholder="Enter new TODO"
           v-model="newItem"
         />
         <button
@@ -24,7 +24,10 @@
             <span>
               {{ item.name }}
             </span>
-            <button class="button is-danger" @click="item.deleted = true">
+            <button
+              class="button is-warning is-small"
+              @click="item.deleted = true"
+            >
               <box-icon name="x"></box-icon>
             </button>
           </div>
