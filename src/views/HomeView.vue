@@ -1,38 +1,38 @@
 <template>
   <div>
     <div>
-      <div>
-        <input
-          class="input"
-          type="text"
-          placeholder="Enter new TODO"
-          v-model="newItem"
-        />
-        <button
-          class="button is-black"
-          @click="addItemToList()"
-          :disabled="!newItem"
-        >
-          +
-        </button>
-      </div>
+      <input
+        class="input"
+        type="text"
+        placeholder="Enter new TODO"
+        v-model="newItem"
+      />
+      <button
+        class="button is-success"
+        @click="addItemToList()"
+        :disabled="!newItem"
+      >
+        +
+      </button>
+    </div>
 
-      <ul class="mt-5">
-        <h1 class="title">Tasks</h1>
-        <li v-for="(item, index) in todoStore.items" :key="index" class="mt-2">
-          <div v-if="!item.deleted">
-            <span>
-              {{ item.name }}
-            </span>
-            <button
-              class="button is-warning is-small"
-              @click="item.deleted = true"
-            >
-              <box-icon name="x"></box-icon>
-            </button>
+    <div v-for="(item, index) in todoStore.items" :key="index">
+      <div class="card mt-5" v-if="!item.deleted">
+        <div class="card-content">
+          <div class="content">
+            {{ item.name }}
           </div>
-        </li>
-      </ul>
+        </div>
+        <footer class="card-footer">
+          <button class="card-footer-item button" disabled>Edit</button>
+          <button
+            class="card-footer-item button is-warning"
+            @click="item.deleted = true"
+          >
+            Delete <box-icon name="x"></box-icon>
+          </button>
+        </footer>
+      </div>
     </div>
   </div>
 </template>

@@ -8,23 +8,22 @@
           height="28"
         />
       </a>
-
-      <router-link
-        class="navbar-item is-active"
-        :class="{ 'is-tab': $route.path === '/' }"
-        to="/"
-      >
-        <box-icon class="menu-icon" name="home"></box-icon> Home
-      </router-link>
-
-      <router-link
-        class="navbar-item is-active"
-        :class="{ 'is-tab': $route.path === '/deleted' }"
-        to="/deleted"
-      >
-        <box-icon class="menu-icon" name="folder-minus"></box-icon>Deleted tasks
-      </router-link>
     </div>
+    <router-link
+      class="navbar-item is-active"
+      :class="{ 'is-tab': $route.path === '/' }"
+      to="/"
+    >
+      <box-icon class="menu-icon" name="home"></box-icon> Home
+    </router-link>
+
+    <router-link
+      class="navbar-item is-active"
+      :class="{ 'is-tab': $route.path === '/deleted' }"
+      to="/deleted"
+    >
+      <box-icon class="menu-icon" name="folder-minus"></box-icon>Deleted tasks
+    </router-link>
   </nav>
   <div class="container mt-6 is-flex is-justify-content-center">
     <RouterView />

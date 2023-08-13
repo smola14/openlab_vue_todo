@@ -1,25 +1,30 @@
 <template>
   <div>
-    <ul>
-      <h1 class="title">Deleted tasks</h1>
+    <h1 class="title">Deleted tasks</h1>
 
-      <li v-for="(item, index) in todoStore.items" :key="index" class="mt-2">
-        <div v-if="item.deleted">
-          <span>
+    <div v-for="(item, index) in todoStore.items" :key="index">
+      <div class="card mt-5" v-if="item.deleted">
+        <div class="card-content">
+          <div class="content">
             {{ item.name }}
-          </span>
-          <button class="button is-small is-info" @click="item.deleted = false">
-            <box-icon name="refresh"></box-icon>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <button
+            class="card-footer-item button is-info"
+            @click="item.deleted = false"
+          >
+            Refresh<box-icon color="white" name="refresh"></box-icon>
           </button>
           <button
-            class="button is-small is-danger"
+            class="card-footer-item button is-danger"
             @click="deleteItemPermanently(index)"
           >
-            <box-icon name="trash"></box-icon>
+            Delete perm. <box-icon color="white" name="trash"></box-icon>
           </button>
-        </div>
-      </li>
-    </ul>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
