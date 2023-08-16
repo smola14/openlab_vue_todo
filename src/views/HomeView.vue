@@ -16,7 +16,7 @@
         +
       </button>
     </div>
-
+    <h1 class="title mt-5">Active tasks</h1>
     <div v-for="(item, index) in todoStore.items" :key="index">
       <div class="card mt-5" v-if="!item.deleted">
         <div class="card-content">
