@@ -6,6 +6,7 @@
         type="text"
         placeholder="Enter new TODO"
         v-model="newItem"
+        @keyup.enter="newItem && addItemToList()"
       />
       <button
         class="button is-success"
