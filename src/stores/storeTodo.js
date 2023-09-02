@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useStoreTodo = defineStore('todo', {
   state: () => ({
@@ -6,7 +7,14 @@ export const useStoreTodo = defineStore('todo', {
   }),
   actions: {
     fetchData() {
-      console.log('fetching data')
+      axios
+        .get('todos')
+        .then((response) => {
+          console.log('Moxios Response:', response.data)
+        })
+        .catch((error) => {
+          console.error('Moxios Error:', error)
+        })
     },
   },
 })
