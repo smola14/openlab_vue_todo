@@ -39,13 +39,16 @@ export default {
   },
 
   mounted() {
-    this.todoStore.fetchData()
-    
+    this.todoStore.getTodos()
   },
 
   methods: {
     addItemToList() {
-      this.todoStore.items.push({ name: this.newItem, deleted: false })
+      this.todoStore.addTodo({
+        name: this.newItem,
+        deleted: false,
+        id: new Date().getTime(),
+      })
       this.newItem = ''
     },
   },

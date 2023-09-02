@@ -2,70 +2,66 @@ import axios from 'axios'
 import { encodeGetParams, strToRegex } from '../utils/moxios.util.js'
 
 export class Moxios {
-	// _mocks = {}
+  // _mocks = {}
 
-	constructor() {
-		axios.interceptors.request.use(this._redirectRequestToMock.bind(this))
-		this._mocks = {}
-	}
+  constructor() {
+    axios.interceptors.request.use(this._redirectRequestToMock.bind(this))
+    this._mocks = {}
+  }
 
-	mock(append) {
-		for (const k in append) {
-			let m = append[k]
-			if (m === false) continue
-			
-			m = {}
-			
-			m.name = k
-			m.url = k.split(' ')[1]
+  mock(append) {
+    for (const k in append) {
+      let m = append[k]
+      if (m === false) continue
 
-			if (!m.reUrl)
+      m = {}
 
-				m.reUrl = strToRegex( m.url )
+      m.name = k
+      m.url = k.split(' ')[1]
 
-			if (!m.matchMethod)
-				m.matchMethod = k.split(' ')[0].toLowerCase()
+      if (!m.reUrl) m.reUrl = strToRegex(m.url)
 
-			this._mocks[k] = m
-		}
-	}
+      if (!m.matchMethod) m.matchMethod = k.split(' ')[0].toLowerCase()
 
+      this._mocks[k] = m
+    }
+  }
 
-	_redirectRequestToMock(config) {
-		if (localStorage['isMoxios'] == 'false') {
-			return config
-		}
+  _redirectRequestToMock(config) {
+    if (localStorage['isMoxios'] == 'false') {
+      return config
+    }
 
-		const url = config.url.replace(/https?:\/\/[^/?]+/, '')
+    const url = config.url.replace(/https?:\/\/[^/?]+/, '')
 
-		let mocked
-		for (const k in this._mocks) {
-			const m = this._mocks[k]
+    let mocked
+    for (const k in this._mocks) {
+      const m = this._mocks[k]
 
-			if (config.method == m.matchMethod && url.match(m.reUrl)) {
-				mocked = m
-				break
-			}
-		}
+      if (config.method == m.matchMethod && url.match(m.reUrl)) {
+        mocked = m
+        break
+      }
+    }
 
-		if (mocked) {
-			if (!mocked.fname)
-				process.env.VUE_APP_PLATFORM
-					? mocked.fname = `/mock/${process.env.VUE_APP_PLATFORM}/${mocked.url}.${config.method.toUpperCase()}.json`
-					: mocked.fname = `/mock/${mocked.url}.${config.method.toUpperCase()}.json`
+    if (mocked) {
+      if (!mocked.fname)
+        mocked.fname = `/mock/${mocked.url}.${config.method.toUpperCase()}.json`
 
-			const c = {
-				method: 'get',
-				url: window.location.origin + mocked.fname+'?___MOCK___&'+encodeGetParams(config.data||{}),
-			}
+      const c = {
+        method: 'get',
+        url:
+          window.location.origin +
+          mocked.fname +
+          '?___MOCK___&' +
+          encodeGetParams(config.data || {}),
+      }
 
-			console.log(c)
+      console.log(c)
 
-			config = {...config, ...c}
-		}
+      config = { ...config, ...c }
+    }
 
-		return config
-	}
-
+    return config
+  }
 }
-

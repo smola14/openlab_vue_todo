@@ -40,5 +40,8 @@ export default {
       this.todoStore.items.splice(index, 1)
     },
   },
+  mounted() {
+    this.todoStore.getTodos()
+  },
 }
 </script>
