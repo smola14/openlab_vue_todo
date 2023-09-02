@@ -38,6 +38,10 @@ export default {
     SingleTodo,
   },
 
+  mounted() {
+    this.todoStore.fetchData()
+  },
+
   methods: {
     addItemToList() {
       this.todoStore.items.push({ name: this.newItem, deleted: false })

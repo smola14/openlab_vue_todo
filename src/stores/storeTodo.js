@@ -4,5 +4,9 @@ export const useStoreTodo = defineStore('todo', {
   state: () => ({
     items: [],
   }),
-  actions: {},
+  actions: {
+    fetchData() {
+      console.log('fetching data')
+    },
+  },
 })
