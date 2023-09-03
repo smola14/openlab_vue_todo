@@ -31,7 +31,6 @@ export default {
         (item) => item.id === this.item.id
       )
 
-      // Check if the item was found and update its 'edit' property to true
       if (itemToEdit) {
         itemToEdit.edit = true
       }
