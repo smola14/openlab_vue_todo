@@ -17,8 +17,9 @@
       </button>
     </div>
     <h1 class="title mt-5">Active tasks</h1>
-    <div v-for="(item, index) in todoStore.items" :key="index">
-      <SingleTodo :item="item"></SingleTodo>
+    <div v-for="(item, index) in todoItems" :key="index">
+      <SingleTodo v-if="!item.edit" :item="item" />
+      <EditTodo v-else :item="item" />
     </div>
   </div>
 </template>
@@ -27,6 +28,8 @@
 import { mapStores } from 'pinia'
 import { useStoreTodo } from '@/stores/storeTodo.js'
 import SingleTodo from '@/components/SingleTodo.vue'
+import EditTodo from '@/components/EditTodo.vue'
+
 export default {
   data() {
     return {
@@ -36,10 +39,7 @@ export default {
   },
   components: {
     SingleTodo,
-  },
-
-  mounted() {
-    this.todoStore.getTodos()
+    EditTodo,
   },
 
   methods: {
@@ -54,6 +54,9 @@ export default {
   },
   computed: {
     ...mapStores(useStoreTodo),
+    todoItems() {
+      return this.todoStore.items.filter((todo) => todo.deleted === false)
+    },
   },
 }
 </script>

@@ -1,19 +1,17 @@
 <template>
-  <div class="card mt-5">
+  <div class="card mt-5" v-if="!item.deleted">
     <div class="card-content">
-      <div class="content">
-        {{ item.name }}
-      </div>
+      <input type="text" class="input" v-model="item.name" />
     </div>
     <footer class="card-footer">
-      <button class="card-footer-item button" @click="editTodoItem">
-        Edit
+      <button class="card-footer-item button" @click="item.edit = false">
+        Save
       </button>
       <button
         class="card-footer-item button is-warning"
-        @click="item.deleted = true"
+        @click="item.edit = false"
       >
-        Delete <box-icon name="x"></box-icon>
+        Cancel
       </button>
     </footer>
   </div>
@@ -37,6 +35,7 @@ export default {
       }
     },
   },
+
   computed: {
     ...mapStores(useStoreTodo),
   },

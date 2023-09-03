@@ -44,3 +44,18 @@ html {
   margin-right: 5px;
 }
 </style>
+
+<script>
+import { mapStores } from 'pinia'
+import { useStoreTodo } from '@/stores/storeTodo.js'
+
+export default {
+  mounted() {
+    this.todoStore.getTodos()
+  },
+
+  computed: {
+    ...mapStores(useStoreTodo),
+  },
+}
+</script>

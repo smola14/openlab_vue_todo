@@ -2,26 +2,31 @@
   {
     "name": "Buy groceries",
     "id": "1",
-    "deleted": false
+    "deleted": false,
+    "edit": false
   },
   {
     "name": "Call Mom",
     "id": "2",
-    "deleted": false
+    "deleted": false,
+    "edit": false
   },
   {
     "name": "Do laundry",
     "id": "3",
-    "deleted": false
+    "deleted": false,
+    "edit": false
   },
   {
     "name": "Pay bills",
     "id": "4",
-    "deleted": false
+    "deleted": false,
+    "edit": false
   },
   {
     "name": "Go for a walk",
     "id": "5",
-    "deleted": true
+    "deleted": true,
+    "edit": false
   }
 ]

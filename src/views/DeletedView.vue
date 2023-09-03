@@ -2,8 +2,8 @@
   <div>
     <h1 class="title">Deleted tasks</h1>
 
-    <div v-for="(item, index) in todoStore.items" :key="index">
-      <div class="card mt-5" v-if="item.deleted">
+    <div v-for="(item, index) in deletedTodoItems" :key="index">
+      <div class="card mt-5">
         <div class="card-content">
           <div class="content">
             {{ item.name }}
@@ -34,14 +34,14 @@ import { useStoreTodo } from '@/stores/storeTodo.js'
 export default {
   computed: {
     ...mapStores(useStoreTodo),
+    deletedTodoItems() {
+      return this.todoStore.items.filter((todo) => todo.deleted === true)
+    },
   },
   methods: {
     deleteItemPermanently(index) {
       this.todoStore.items.splice(index, 1)
     },
-  },
-  mounted() {
-    this.todoStore.getTodos()
   },
 }
 </script>

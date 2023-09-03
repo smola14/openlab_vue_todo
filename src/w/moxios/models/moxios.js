@@ -57,8 +57,6 @@ export class Moxios {
           encodeGetParams(config.data || {}),
       }
 
-      console.log(c)
-
       config = { ...config, ...c }
     }
 
