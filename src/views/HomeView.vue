@@ -17,9 +17,16 @@
       </button>
     </div>
     <h1 class="title mt-5">Active tasks</h1>
-    <div v-for="(item, index) in todoItems" :key="index">
-      <SingleTodo v-if="!item.edit" :item="item" />
-      <EditTodo v-else :item="item" />
+    <div>
+      <div v-if="todoStore.loading">
+        <progress class="progress is-small is-primary" max="100">15%</progress>
+      </div>
+      <div v-else>
+        <div v-for="(item, index) in todoStore.items" :key="index">
+          <SingleTodo v-if="!item.edit" :item="item" />
+          <EditTodo v-else :item="item" />
+        </div>
+      </div>
     </div>
   </div>
 </template>

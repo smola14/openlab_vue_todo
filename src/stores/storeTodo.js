@@ -4,9 +4,11 @@ import axios from 'axios'
 export const useStoreTodo = defineStore('todo', {
   state: () => ({
     items: [],
+    loading: false,
   }),
   actions: {
     getTodos() {
+      this.loading = true
       axios
         .get('todos')
         .then((response) => {
@@ -14,6 +16,9 @@ export const useStoreTodo = defineStore('todo', {
         })
         .catch((error) => {
           console.error('Moxios Error:', error)
+        })
+        .finally(() => {
+          this.loading = false
         })
     },
     addTodo(todo) {
