@@ -1,16 +1,11 @@
 <template>
   <div class="card mt-5" v-if="!item.deleted">
     <div class="card-content">
-      <input type="text" class="input" v-model="item.name" />
+      <input type="text" class="input" v-model="editedName" />
     </div>
     <footer class="card-footer">
-      <button class="card-footer-item button" @click="item.edit = false">
-        Save
-      </button>
-      <button
-        class="card-footer-item button is-warning"
-        @click="item.edit = false"
-      >
+      <button class="card-footer-item button" @click="saveEdit">Save</button>
+      <button class="card-footer-item button is-warning" @click="cancelEditing">
         Cancel
       </button>
     </footer>
@@ -20,22 +15,24 @@
 <script>
 import { mapStores } from 'pinia'
 import { useStoreTodo } from '@/stores/storeTodo.js'
+
 export default {
+  data() {
+    return {
+      editedName: this.item.name,
+    }
+  },
   props: ['item'],
   methods: {
-    editTodoItem() {
-      this.$emit('open-edit')
-      const itemToEdit = this.todoStore.items.find(
-        (item) => item.id === this.item.id
-      )
-
-      // Check if the item was found and update its 'edit' property to true
-      if (itemToEdit) {
-        itemToEdit.edit = true
-      }
+    saveEdit() {
+      this.item.name = this.editedName
+      this.item.edit = false
+    },
+    cancelEditing() {
+      this.editedName = this.item.name
+      this.item.edit = false
     },
   },
-
   computed: {
     ...mapStores(useStoreTodo),
   },
