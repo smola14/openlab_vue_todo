@@ -62,7 +62,11 @@ export default {
   computed: {
     ...mapStores(useStoreTodo),
     todoItems() {
-      return this.todoStore.items.filter((todo) => todo.deleted === false)
+      const todoItems = this.todoStore.items
+        ? this.todoStore.items.filter((todo) => todo.deleted === false)
+        : []
+
+      return todoItems
     },
   },
 }

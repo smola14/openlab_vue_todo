@@ -37,6 +37,7 @@ export default {
       if (itemToDelete) {
         itemToDelete.deleted = true
       }
+      this.todoStore.saveTodosToLocalStorage()
     },
   },
   computed: {

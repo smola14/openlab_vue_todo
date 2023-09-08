@@ -8,27 +8,20 @@ export const useStoreTodo = defineStore('todo', {
   }),
   actions: {
     getTodos() {
-      this.loading = true
-      axios
-        .get('todos')
-        .then((response) => {
-          this.items = response.data
-        })
-        .catch((error) => {
-          console.error('Moxios Error:', error)
-        })
-        .finally(() => {
-          this.loading = false
-        })
+      const todosFromLocalStorage = this.getTodosFromLocalStorage()
+      this.items = Array.isArray(todosFromLocalStorage)
+        ? todosFromLocalStorage
+        : []
     },
     addTodo(todo) {
       axios
         .post('todos', todo)
         .then(() => {
           this.items.push(todo)
+          this.saveTodosToLocalStorage()
         })
         .catch((error) => {
-          console.error('Moxios Error:', error)
+          console.error('Axios Error:', error)
         })
     },
     editTodo(editedTodo) {
@@ -40,6 +33,7 @@ export const useStoreTodo = defineStore('todo', {
           )
 
           this.items[todoToEdit] = editedTodo
+          this.saveTodosToLocalStorage()
         })
         .catch((error) => {
           console.error('Moxios Error:', error)
@@ -50,13 +44,25 @@ export const useStoreTodo = defineStore('todo', {
         .post('todos/' + todoId)
         .then(() => {
           const todoToRemove = this.items.findIndex(
-            (todo) => todo.id === todoId.id
+            (todo) => todo.id === todoId
           )
-          this.items.splice(todoToRemove, 1)
+
+          if (todoToRemove !== -1) {
+            this.items.splice(todoToRemove, 1)
+            this.saveTodosToLocalStorage()
+          }
         })
         .catch((error) => {
           console.error('Moxios Error:', error)
         })
+    },
+    getTodosFromLocalStorage() {
+      const todoItemsJSON = localStorage.getItem('items')
+      return todoItemsJSON ? JSON.parse(todoItemsJSON) : []
+    },
+    saveTodosToLocalStorage() {
+     
+      localStorage.setItem('items', JSON.stringify(this.items))
     },
   },
 })

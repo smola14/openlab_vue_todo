@@ -2,7 +2,7 @@
   <div>
     <h1 class="title">Deleted tasks</h1>
 
-    <div v-for="(item, index) in deletedTodoItems" :key="index">
+    <div v-for="item in deletedTodoItems" :key="item.id">
       <div class="card mt-5">
         <div class="card-content">
           <div class="content">
@@ -12,13 +12,13 @@
         <footer class="card-footer">
           <button
             class="card-footer-item button is-info"
-            @click="item.deleted = false"
+            @click="refreshItem(item.id)"
           >
             Refresh<box-icon color="white" name="refresh"></box-icon>
           </button>
           <button
             class="card-footer-item button is-danger"
-            @click="deleteItemPermanently(index)"
+            @click="deleteItemPermanently(item.id)"
           >
             Delete perm. <box-icon color="white" name="trash"></box-icon>
           </button>
@@ -39,8 +39,12 @@ export default {
     },
   },
   methods: {
-    deleteItemPermanently(index) {
-      this.todoStore.deleteTodo(index)
+    deleteItemPermanently(id) {
+      this.todoStore.deleteTodo(id)
+    },
+    refreshItem(id) {
+      this.todoStore.items.find((todo) => todo.id === id).deleted = false
+      this.todoStore.saveTodosToLocalStorage()
     },
   },
 }
