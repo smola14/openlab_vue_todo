@@ -25,8 +25,34 @@ export const useStoreTodo = defineStore('todo', {
       axios
         .post('todos', todo)
         .then(() => {
-          alert('Todo added!')
           this.items.push(todo)
+        })
+        .catch((error) => {
+          console.error('Moxios Error:', error)
+        })
+    },
+    editTodo(editedTodo) {
+      axios
+        .post('todos/' + editedTodo.id, editedTodo)
+        .then(() => {
+          const todoToEdit = this.items.findIndex(
+            (todo) => todo.id === editedTodo.id
+          )
+
+          this.items[todoToEdit] = editedTodo
+        })
+        .catch((error) => {
+          console.error('Moxios Error:', error)
+        })
+    },
+    deleteTodo(todoId) {
+      axios
+        .post('todos/' + todoId)
+        .then(() => {
+          const todoToRemove = this.items.findIndex(
+            (todo) => todo.id === todoId.id
+          )
+          this.items.splice(todoToRemove, 1)
         })
         .catch((error) => {
           console.error('Moxios Error:', error)

@@ -25,8 +25,13 @@ export default {
   props: ['item'],
   methods: {
     saveEdit() {
-      this.item.name = this.editedName
       this.item.edit = false
+      this.todoStore.editTodo({
+        name: this.editedName,
+        id: this.item.id,
+        deleted: false,
+        edit: false,
+      })
     },
     cancelEditing() {
       this.editedName = this.item.name

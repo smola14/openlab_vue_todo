@@ -6,13 +6,8 @@
       </div>
     </div>
     <footer class="card-footer">
-      <button class="card-footer-item button" @click="editTodoItem">
-        Edit
-      </button>
-      <button
-        class="card-footer-item button is-warning"
-        @click="item.deleted = true"
-      >
+      <button class="card-footer-item button" @click="editTodo">Edit</button>
+      <button class="card-footer-item button is-warning" @click="deleteTodo">
         Delete <box-icon name="x"></box-icon>
       </button>
     </footer>
@@ -25,14 +20,22 @@ import { useStoreTodo } from '@/stores/storeTodo.js'
 export default {
   props: ['item'],
   methods: {
-    editTodoItem() {
-      this.$emit('open-edit')
+    editTodo() {
       const itemToEdit = this.todoStore.items.find(
         (item) => item.id === this.item.id
       )
 
       if (itemToEdit) {
         itemToEdit.edit = true
+      }
+    },
+    deleteTodo() {
+      const itemToDelete = this.todoStore.items.find(
+        (item) => item.id === this.item.id
+      )
+
+      if (itemToDelete) {
+        itemToDelete.deleted = true
       }
     },
   },

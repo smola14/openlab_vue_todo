@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     deleteItemPermanently(index) {
-      this.todoStore.items.splice(index, 1)
+      this.todoStore.deleteTodo(index)
     },
   },
 }

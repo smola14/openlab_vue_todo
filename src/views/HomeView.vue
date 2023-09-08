@@ -22,7 +22,7 @@
         <progress class="progress is-small is-primary" max="100">15%</progress>
       </div>
       <div v-else>
-        <div v-for="(item, index) in todoStore.items" :key="index">
+        <div v-for="(item, index) in todoItems" :key="index">
           <SingleTodo v-if="!item.edit" :item="item" />
           <EditTodo v-else :item="item" />
         </div>
