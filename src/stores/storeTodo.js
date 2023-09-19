@@ -66,14 +66,10 @@ export const useStoreTodo = defineStore('todo', {
   },
   getters: {
     activeTasks: (state) => {
-      const activeItems = state.items.filter((item) => !item.deleted)
-
-      return activeItems
+      return state.items.filter((item) => !item.deleted)
     },
     inactiveTasks: (state) => {
-      const inactiveItems = state.items.filter((item) => item.deleted)
-
-      return inactiveItems
+      return state.items.filter((item) => item.deleted)
     },
   },
 })
