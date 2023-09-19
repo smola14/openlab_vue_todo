@@ -14,7 +14,9 @@
       :class="{ 'is-tab': $route.path === '/' }"
       to="/"
     >
-      <box-icon class="menu-icon" name="home"></box-icon> Home
+      <box-icon class="menu-icon" name="home"></box-icon> Home ({{
+        todoStore.activeTasks.length
+      }})
     </router-link>
 
     <router-link
@@ -23,6 +25,7 @@
       to="/deleted"
     >
       <box-icon class="menu-icon" name="folder-minus"></box-icon>Deleted tasks
+      ({{ todoStore.inactiveTasks.length }})
     </router-link>
   </nav>
   <div class="container mt-6 is-flex is-justify-content-center">

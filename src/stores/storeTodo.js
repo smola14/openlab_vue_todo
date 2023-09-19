@@ -61,8 +61,19 @@ export const useStoreTodo = defineStore('todo', {
       return todoItemsJSON ? JSON.parse(todoItemsJSON) : []
     },
     saveTodosToLocalStorage() {
-     
       localStorage.setItem('items', JSON.stringify(this.items))
+    },
+  },
+  getters: {
+    activeTasks: (state) => {
+      const activeItems = state.items.filter((item) => !item.deleted)
+
+      return activeItems
+    },
+    inactiveTasks: (state) => {
+      const inactiveItems = state.items.filter((item) => item.deleted)
+
+      return inactiveItems
     },
   },
 })

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="title">Deleted tasks</h1>
+    <h1 class="title">Deleted tasks - {{ todoStore.inactiveTasks.length }}</h1>
 
-    <div v-for="item in deletedTodoItems" :key="item.id">
+    <div v-for="item in todoStore.inactiveTasks" :key="item.id">
       <div class="card mt-5">
         <div class="card-content">
           <div class="content">
@@ -34,9 +34,6 @@ import { useStoreTodo } from '@/stores/storeTodo.js'
 export default {
   computed: {
     ...mapStores(useStoreTodo),
-    deletedTodoItems() {
-      return this.todoStore.items.filter((todo) => todo.deleted === true)
-    },
   },
   methods: {
     deleteItemPermanently(id) {
