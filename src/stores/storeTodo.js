@@ -8,7 +8,7 @@ export const useStoreTodo = defineStore('todo', {
   }),
   actions: {
     getTodos() {
-      const todosFromLocalStorage = this.getTodosFromLocalStorage()
+      const todosFromLocalStorage = this.laodTodosFromLocalStorage()
       this.items = Array.isArray(todosFromLocalStorage)
         ? todosFromLocalStorage
         : []
@@ -56,10 +56,7 @@ export const useStoreTodo = defineStore('todo', {
           console.error('Moxios Error:', error)
         })
     },
-    getTodosFromLocalStorage() {
-      const todoItemsJSON = localStorage.getItem('items')
-      return todoItemsJSON ? JSON.parse(todoItemsJSON) : []
-    },
+
     saveTodosToLocalStorage() {
       localStorage.setItem('items', JSON.stringify(this.items))
     },
@@ -70,6 +67,10 @@ export const useStoreTodo = defineStore('todo', {
     },
     inactiveTasks: (state) => {
       return state.items.filter((item) => item.deleted)
+    },
+    loadTodosFromLocalStorage() {
+      const todoItemsJSON = localStorage.getItem('items')
+      return todoItemsJSON ? JSON.parse(todoItemsJSON) : []
     },
   },
 })
